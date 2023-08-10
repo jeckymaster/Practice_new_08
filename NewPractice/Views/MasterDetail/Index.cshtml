@@ -1,0 +1,101 @@
+﻿@using NewPractice.Models;
+@model OrderMaster
+@{
+    ViewBag.Title = "Index";
+}
+
+<fieldset>
+    <legend>Item order</legend>
+    <table style="width:30%">
+        <tr style="padding-bottom:150px">
+            <td>Order No</td>
+            <td> <input type="text" id="txtOrderNo" name="OrderNo" style="width:130px" /></td>
+        </tr>
+
+        <tr>
+            <td>Order Date</td>
+            <td> <input type="date" id="txtOrderDate" name="OrderDate" style="width:130px"/></td>
+        </tr>
+
+        <tr>
+            <td>Party</td>
+            @*<td> <input type="text" id="txtPartyId" name="PartyId" /></td>*@
+            <td>@Html.DropDownList("OrderParty", "Select")</td>
+        </tr>
+    </table>
+</fieldset>
+
+
+
+<br />
+<br />
+
+
+
+<fieldset>
+    <legend>Item Order Details</legend>
+    <table style="width:100%" id="tblItemDetails">
+        <thead>
+            <tr>
+                @*<th>Detail Number</th>*@
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                @*<td> <input type="text" id="txtOrderDetailNo" name="OrderDetailNo" /></td>*@
+
+
+
+                @*<td> <input type="text" id="txtItem" name="Item" onchange="GetItems()" /></td>*@
+                @*<td>@Html.DropDownList("ItemMaster", "Select", new { onchange = "doFunction();" }) </td>*@
+                <td>
+                    @Html.DropDownList("ItemMaster", ViewData["ItemName"] as SelectList,
+             "-Select Product-", new { onchange = "doFunction();",id="ddlItem" })
+                            </td>
+
+
+                <td> <input type="text" id="txtItemQty" name="ItemQty" style="text-align:right" @*onchange="GetTotal()"*@/></td>
+
+
+
+                <td> <input type="text" id="txtRate" name="Rate" style="text-align:right" @*onchange="GetTotal()"*@/></td>
+
+
+
+                <td> <input type="text" id="txtAmount" name="Amount" style="text-align:right"/></td>
+
+                <td>
+                    <input type="button" id="BtnAdd" name="BtnAdd" value="Add" onclick="AddNewRow()" /> &nbsp;
+                    <input type="button" id="BtnDelete" name="BtnDelete" value="Delete" onclick="DeleteRow(this)" />
+                </td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td style="text-align:right"> Total </td>
+                <td>
+                    <input type="text" name="Total" id="txtTotal" readonly="readonly" style="text-align:right" />
+                </td>
+            </tr>
+
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td>
+                    <input type="button" value="Save" id="BtnSave" />
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+</fieldset>
+<script src="~/Scripts/MasterDetailScript.js"></script>

@@ -1,0 +1,126 @@
+﻿
+
+@using NewPractice.Models;
+@model OrderMaster
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@*<script type="module">
+    import { w2grid } from 'https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js'
+
+
+    </script>*@
+
+
+
+<form id="FromItemOrder" enctype="multipart/form-data">
+    <div id="NewFormContainer">
+
+        <div id="DivOrderMaster">
+
+            <div id="lblOrderNo" class="FullWidth" style="padding-top:20px;">
+
+                <div style="display:flex; padding-bottom:5px;">
+                    @Html.DisplayName("Order Number")
+
+                </div>
+
+                @Html.TextBoxFor(m => m.OrderNo, new
+           {
+                id = "txtOrderNo"
+           })
+
+            </div>
+
+
+            <div id="lblOrderDate" class="FullWidth" style="padding-top:20px;">
+
+                <div style="display:flex; padding-bottom:5px;">
+                    @Html.DisplayName("Order Date")
+
+                </div>
+
+                @Html.TextBoxFor(m => m.OrderDate, "{0:yyyy-MM-dd}", new
+           {
+               id = "TxtDate",
+               type = "date"
+           })
+
+            </div>
+
+
+            <div id="lblOrderParty" class="FullWidth" style="padding-top:20px;">
+
+                <div style="display:flex; padding-bottom:5px;">
+                    @Html.DisplayName("Order Party")
+
+                </div>
+
+                @Html.DropDownListFor(m => m.PartyCode,
+               ViewBag.OrderParty as SelectList, "-Select Party-", new { id = "ddlParty" })
+
+            </div>
+
+        </div>
+        <br />
+        <br />
+
+
+
+        <div id="DivTxtDetails" style="display:flex; flex-direction:row">
+            <div>
+                @Html.DropDownList("ItemMaster", ViewData["ItemName"] as SelectList,
+               "-Select Product-", new { onchange = "fncGetRate();", id = "ddlItem" })
+
+                @*@Html.DropDownList("ItemMaster", "Select")*@
+                <!--<input type="text" id="txtItemName" name="ItemName" style="text-align:right"--> @*onchange="GetTotal()"*@ <!--/>-->
+            </div>
+            <div>
+                <input type="text" id="txtItemQty" name="ItemQty" style="text-align:right" onchange="GetTotal()" />
+            </div>
+            <div>
+                <input type="text" id="txtItemRate" name="ItemRate" style="text-align:right" onchange="GetTotal()" />
+            </div>
+            <div>
+                <input type="text" id="txtItemAmt" name="ItemAmt" style="text-align:right" readonly="readonly" />
+            </div>
+
+            <div>
+                <input type="button" id="BtnAddData" value="Add" onclick="addARecord()" />
+            </div>
+            <div>
+                <input type="button" id="BtnRemove" value="Remove" onclick="removeRecords()" />
+            </div>
+        </div>
+        <div>
+            <input type="button" id="BtnSave" value="SAVE" onclick="SaveData()" />
+        </div>
+        <div id="DivOrderDetails">
+            <div id="DivListOrderDetails" style="height:300px; display:flex; flex:1;">
+
+            </div>
+        </div>
+
+        <br />
+        <br />
+        
+
+        <div id="DivOrderDetailsHISTORY">
+            <div id="DivListOrderDetailsHISTORY" style="height:300px; display:flex; flex:1;">
+
+            </div>
+        </div>
+    </div>
+
+    </form>
+
+    <link href="~/Scripts/w2ui-2.0.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="module" src="~/Scripts/w2ui-2.0.es6.js"></script>
+    <script src="~/Scripts/w2ui-2.0.js"></script>
+    <script src="~/Scripts/ItemJavaScript.js"></script>
+
+
